@@ -1,13 +1,23 @@
 ﻿@page "/"
 
-<p>Hello, @CustomToUpper(UserName)</p>
+<p>Hello, @StringUtilities.CustomToUpper(UserName)</p>
 
 <p>Let's add 2 + 2 = @(2 + 2)</p>
 
 <button @onclick="@(() => Console.WriteLine("Button clicked."))">Click me</button>
 
+<div>
+    <h3>Movie</h3>
+    <p>Title: <b>@SpiderMan.Title</b></p>
+    <p>Release Date: @SpiderMan.ReleaseDate.ToString("dd MMM yyyy")</p>
+</div>
+
 @code{
     public string UserName { get; set; } = "Alex";
 
-    private string CustomToUpper(string value) => value.ToUpper();
+    public Movie SpiderMan { get; set; } = new Movie
+    {
+        Title = "Spider Man: Far From Home",
+        ReleaseDate = new DateTime(2019, 7, 2)
+    };
 }
