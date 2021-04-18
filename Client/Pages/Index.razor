@@ -8,12 +8,19 @@
 
 <div>
     <h3>Movies</h3>
-    @for (int i = 0; i < movies.Count; i++)
+    @if (movies != null)
     {
-        <div style="background-color: @(i % 2 == 0 ? "lightblue" : "pink")">
-            <p>@(i + 1). Title: <b>@movies[i].Title</b></p>
-            <p>Release Date: @movies[i].ReleaseDate.ToString("dd MMM yyyy")</p>
-        </div>
+        for (int i = 0; i < movies.Count; i++)
+        {
+            <div style="background-color: @(i % 2 == 0 ? "lightblue" : "pink")">
+                <p>@(i + 1). Title: <b>@movies[i].Title</b></p>
+                <p>Release Date: @movies[i].ReleaseDate.ToString("dd MMM yyyy")</p>
+            </div>
+        }
+    }
+    else
+    {
+        <p>Loading...</p>
     }
 </div>
 
@@ -22,10 +29,11 @@
 
     private List<Movie> movies;
 
-    protected override void OnInitialized()
+    protected async override Task OnInitializedAsync()
     {
+        await Task.Delay(500);
         movies = new List<Movie>
-    {
+{
                 new Movie { Title = "Spider Man: Far From Home", ReleaseDate = new DateTime(2019, 7, 2) },
                 new Movie { Title = "Moana", ReleaseDate = new DateTime(2016, 11, 23) },
                 new Movie { Title = "Inception", ReleaseDate = new DateTime(2010, 7, 16) },
