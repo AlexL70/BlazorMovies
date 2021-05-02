@@ -1,42 +1,9 @@
 ﻿@page "/"
 
-<p>Hello, @StringUtilities.CustomToUpper(UserName)</p>
-
-<p>Let's add 2 + 2 = @(2 + 2)</p>
-
-<button @onclick="@(() => Console.WriteLine("Button clicked."))">Click me</button>
-
 <div>
     <h3>Movies</h3>
-    @if (movies != null)
-    {
-        for (int i = 0; i < movies.Count; i++)
-        {
-            <div style="background-color: @(i % 2 == 0 ? "lightblue" : "pink")">
-                <p>@(i + 1). Title: @((MarkupString)movies[i].Title)</p>
-                <p>Release Date: @movies[i].ReleaseDate.ToString("dd MMM yyyy")</p>
-            </div>
-        }
-    }
-    else
-    {
-        <p>Loading...</p>
-    }
+    <MoviesList></MoviesList>
 </div>
 
 @code{
-    public string UserName { get; set; } = "Alex";
-
-    private List<Movie> movies;
-
-    protected async override Task OnInitializedAsync()
-    {
-        await Task.Delay(500);
-        movies = new List<Movie>
-{
-                new Movie { Title = "<b>Spider Man: Far From Home</b>", ReleaseDate = new DateTime(2019, 7, 2) },
-                new Movie { Title = "<i>Moana</i>", ReleaseDate = new DateTime(2016, 11, 23) },
-                new Movie { Title = "Inception", ReleaseDate = new DateTime(2010, 7, 16) },
-        };
-    }
 }
