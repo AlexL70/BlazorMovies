@@ -7,7 +7,7 @@
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
 <div>
-    <MoviesList />
+    <MoviesList Movies="movies"/>
 </div>
 
 @code {
@@ -16,5 +16,17 @@
     private void IncrementCount()
     {
         currentCount++;
+    }
+
+    private List<Movie> movies;
+
+    protected async override Task OnInitializedAsync()
+    {
+        await Task.Delay(500);
+        movies = new List<Movie>
+        {
+                new Movie { Title = "Joker", ReleaseDate = new DateTime(2019, 8, 19) },
+                new Movie { Title = "The Avengers", ReleaseDate = new DateTime(2012, 5, 3) },
+        };
     }
 }
