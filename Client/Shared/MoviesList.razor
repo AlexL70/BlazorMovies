@@ -1,6 +1,6 @@
 ﻿@if (Movies == null)
 {
-   <img src="/images/Loading.gif" width="30" height="30" alt="Loading..."/>
+    <img src="/images/Loading.gif" width="30" height="30" alt="Loading..." />
 }
 else if (Movies.Count == 0)
 {
@@ -12,7 +12,7 @@ else
 
     foreach (var movie in Movies)
     {
-        <IndividualMovie Movie="movie" DisplayButtons="displayButtons"/>
+        <IndividualMovie Movie="movie" DisplayButtons="displayButtons" DeleteMovie="DeleteMovie" />
     }
 }
 
@@ -20,4 +20,9 @@ else
     private bool displayButtons = true;
     [Parameter]
     public List<Movie> Movies { get; set; }
+
+    private void DeleteMovie(Movie movie)
+    {
+        Movies.Remove(movie);
+    }
 }
